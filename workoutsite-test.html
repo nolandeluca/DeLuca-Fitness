@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DeLuca Fitness Macro Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.4.0.slim.min.js"
+        integrity="sha256-ZaXnYkHGqIhqTbJ6MB4l9Frs/r7U4jlx7ir8PJYBqbI=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+
+    <form>
+        Macros
+        <br>
+        <br>
+        Weight : <input type="text" id="firstNumber" />
+
+        <input type="button" onClick="doIt()" Value="Calculate" />
+    </form>
+    <p>Your macros are : <br>
+        <p> Calories: <span id="calories"></span><br>
+            <p> Protein: <span id="protein"></span><br>
+                <p> Fat: <span id="fat"></span><br>
+                    <p> Carbs: <span id="carbs"></span><br>
+                        <span id="result"></span>
+                    </p>
+</body>
+<script>
+
+    let calculated = {
+        protein: 0,
+        fat: 0,
+        calories: 0,
+        carbs: 0
+    }
+    const doIt = () => {
+        calculated.weight = document.getElementById("firstNumber").value;
+
+        calculated.weight = parseInt(calculated.weight)
+
+        calculated.protein = (calculated.weight * 1.1).toFixed(2)
+
+        calculated.fat = calculated.weight * .5
+
+        calculated.calories = 13 * calculated.weight
+
+        calculated.carbs = Math.floor(calculated.calories - calculated.protein * 4 - calculated.fat * 9) / 4;
+        // function carbs(protein, fat, calories)
+        sync()
+    }
+    const sync = () => {
+        document.getElementById('protein').innerHTML = `${calculated.protein}g`
+        document.getElementById('carbs').innerHTML = `${calculated.carbs}g`
+        document.getElementById('fat').innerHTML = `${calculated.fat}g`
+        document.getElementById('calories').innerHTML = `${calculated.calories} kcal`
+    }
+</script>
+
+</html>
